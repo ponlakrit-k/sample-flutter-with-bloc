@@ -18,3 +18,10 @@ class TodoEventRemoveTodo extends TodoEvent {
 
   const TodoEventRemoveTodo({required this.index});
 }
+
+class TodoEventUpdateTodo extends TodoEvent {
+  final int index;
+  final TodoModel todo;
+
+  const TodoEventUpdateTodo({required this.index, required this.todo});
+}

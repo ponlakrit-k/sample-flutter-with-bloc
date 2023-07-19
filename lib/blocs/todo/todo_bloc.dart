@@ -24,5 +24,14 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
       emit(TodoLoaded(todoList: todoList));
     });
+
+    on<TodoEventUpdateTodo>((event, emit) {
+      final List<TodoModel> todoList =
+          List.from((state as TodoLoaded).todoList);
+
+      todoList[event.index] = event.todo;
+
+      emit(TodoLoaded(todoList: todoList));
+    });
   }
 }

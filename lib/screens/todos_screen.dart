@@ -37,6 +37,14 @@ class _TodosScreenState extends State<TodosScreen> {
                         subtitle: Text(item.subTitle),
                       ),
                     ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddTodoScreen(
+                                    index: index,
+                                  )));
+                    },
                     onDoubleTap: () {
                       todoBloc.add(TodoEventRemoveTodo(index: index));
                     },

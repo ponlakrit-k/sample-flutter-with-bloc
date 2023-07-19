@@ -5,7 +5,9 @@ import '../blocs/todo/todo_bloc.dart';
 import '../models/todo_model.dart';
 
 class AddTodoScreen extends StatefulWidget {
-  const AddTodoScreen({super.key});
+  final int? index;
+
+  const AddTodoScreen({super.key, this.index});
 
   @override
   State<AddTodoScreen> createState() => _AddTodoScreenState();
@@ -22,44 +24,64 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('ADD TODO'),
+        title: Text(widget.index == null ? 'ADD TODO' : 'EDIT TODO'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: titleCtrl,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Title',
-              ),
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
-            TextField(
-              controller: subTitleCtrl,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Sub title',
-              ),
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
-            ElevatedButton(
-              child: const Text('ADD NEW TODO'),
-              onPressed: () {
-                todoBloc.add(TodoEventAddTodo(
-                    todo: TodoModel(
-                        title: titleCtrl.text, subTitle: subTitleCtrl.text)));
+      body: BlocBuilder<TodoBloc, TodoState>(
+        builder: (context, state) {
+          if (widget.index != null) {
+            final todo = (state as TodoLoaded).todoList[widget.index!];
 
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-        ),
+            titleCtrl.text = todo.title;
+            subTitleCtrl.text = todo.subTitle;
+          }
+
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                TextField(
+                  controller: titleCtrl,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Title',
+                  ),
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                TextField(
+                  controller: subTitleCtrl,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Sub title',
+                  ),
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                ElevatedButton(
+                  child: Text(widget.index == null ? 'ADD TODO' : 'EDIT TODO'),
+                  onPressed: () {
+                    if (widget.index == null) {
+                      todoBloc.add(TodoEventAddTodo(
+                          todo: TodoModel(
+                              title: titleCtrl.text,
+                              subTitle: subTitleCtrl.text)));
+                    } else {
+                      todoBloc.add(TodoEventUpdateTodo(
+                          index: widget.index!,
+                          todo: TodoModel(
+                              title: titleCtrl.text,
+                              subTitle: subTitleCtrl.text)));
+                    }
+
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }
