@@ -31,7 +31,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             final todo = (state as TodoLoaded).todoList[widget.index!];
 
             titleCtrl.text = todo.title;
-            amountCtrl.text = todo.amount.toString();
+            amountCtrl.text = todo.amountTHB.toString();
           }
 
           return Padding(
@@ -64,15 +64,21 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                   onPressed: () {
                     if (widget.index == null) {
                       todoBloc.add(TodoEventAddTodo(
-                          todo: RevenueAccountModel(
-                              title: titleCtrl.text,
-                              amount: int.parse(amountCtrl.text))));
+                        todo: RevenueAccountModel(
+                          title: titleCtrl.text,
+                          amountTHB: double.parse(amountCtrl.text),
+                          amountUSD: 0,
+                        ),
+                      ));
                     } else {
                       todoBloc.add(TodoEventUpdateTodo(
-                          index: widget.index!,
-                          todo: RevenueAccountModel(
-                              title: titleCtrl.text,
-                              amount: int.parse(amountCtrl.text))));
+                        index: widget.index!,
+                        todo: RevenueAccountModel(
+                          title: titleCtrl.text,
+                          amountTHB: double.parse(amountCtrl.text),
+                          amountUSD: 0,
+                        ),
+                      ));
                     }
 
                     Navigator.of(context).pop();
