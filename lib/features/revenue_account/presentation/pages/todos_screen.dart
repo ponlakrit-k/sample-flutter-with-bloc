@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sample_flutter_with_bloc/screens/add_todo_screen.dart';
-
-import '../blocs/todo/todo_bloc.dart';
+import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/bloc/todo_bloc.dart';
+import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/pages/add_todo_screen.dart';
 
 class TodosScreen extends StatefulWidget {
   const TodosScreen({super.key});
@@ -34,7 +33,7 @@ class _TodosScreenState extends State<TodosScreen> {
                       child: ListTile(
                         leading: const Icon(Icons.list),
                         title: Text(item.title),
-                        subtitle: Text(item.subTitle),
+                        subtitle: Text(item.amount.toString()),
                       ),
                     ),
                     onTap: () {

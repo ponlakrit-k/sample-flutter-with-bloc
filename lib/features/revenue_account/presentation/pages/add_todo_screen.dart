@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../blocs/todo/todo_bloc.dart';
-import '../models/todo_model.dart';
+import 'package:sample_flutter_with_bloc/features/revenue_account/data/models/revenue_account_model.dart';
+import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/bloc/todo_bloc.dart';
 
 class AddTodoScreen extends StatefulWidget {
   final int? index;
@@ -15,7 +14,7 @@ class AddTodoScreen extends StatefulWidget {
 
 class _AddTodoScreenState extends State<AddTodoScreen> {
   final titleCtrl = TextEditingController();
-  final subTitleCtrl = TextEditingController();
+  final amountCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             final todo = (state as TodoLoaded).todoList[widget.index!];
 
             titleCtrl.text = todo.title;
-            subTitleCtrl.text = todo.subTitle;
+            amountCtrl.text = todo.amount.toString();
           }
 
           return Padding(
@@ -50,7 +49,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                   height: 10.0,
                 ),
                 TextField(
-                  controller: subTitleCtrl,
+                  controller: amountCtrl,
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Sub title',
@@ -64,15 +64,15 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                   onPressed: () {
                     if (widget.index == null) {
                       todoBloc.add(TodoEventAddTodo(
-                          todo: TodoModel(
+                          todo: RevenueAccountModel(
                               title: titleCtrl.text,
-                              subTitle: subTitleCtrl.text)));
+                              amount: int.parse(amountCtrl.text))));
                     } else {
                       todoBloc.add(TodoEventUpdateTodo(
                           index: widget.index!,
-                          todo: TodoModel(
+                          todo: RevenueAccountModel(
                               title: titleCtrl.text,
-                              subTitle: subTitleCtrl.text)));
+                              amount: int.parse(amountCtrl.text))));
                     }
 
                     Navigator.of(context).pop();

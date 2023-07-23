@@ -8,7 +8,7 @@ abstract class TodoEvent extends Equatable {
 }
 
 class TodoEventAddTodo extends TodoEvent {
-  final TodoModel todo;
+  final RevenueAccountModel todo;
 
   const TodoEventAddTodo({required this.todo});
 }
@@ -21,7 +21,7 @@ class TodoEventRemoveTodo extends TodoEvent {
 
 class TodoEventUpdateTodo extends TodoEvent {
   final int index;
-  final TodoModel todo;
+  final RevenueAccountModel todo;
 
   const TodoEventUpdateTodo({required this.index, required this.todo});
 }

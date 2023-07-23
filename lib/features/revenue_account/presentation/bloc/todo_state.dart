@@ -10,7 +10,7 @@ abstract class TodoState extends Equatable {
 class TodoInitial extends TodoState {}
 
 class TodoLoaded extends TodoState {
-  final List<TodoModel> todoList;
+  final List<RevenueAccountModel> todoList;
 
   const TodoLoaded({required this.todoList});
 

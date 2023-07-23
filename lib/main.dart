@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sample_flutter_with_bloc/blocs/todo/todo_bloc.dart';
-import 'package:sample_flutter_with_bloc/screens/todos_screen.dart';
+import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/bloc/todo_bloc.dart';
+import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/pages/todos_screen.dart';
 
 void main() {
   runApp(BlocProvider(
