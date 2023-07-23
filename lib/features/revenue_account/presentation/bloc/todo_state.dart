@@ -17,3 +17,12 @@ class TodoLoaded extends TodoState {
   @override
   List<Object> get props => [todoList];
 }
+
+class TodoError extends TodoState {
+  final String message;
+
+  const TodoError({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

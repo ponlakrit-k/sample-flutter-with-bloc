@@ -9,7 +9,7 @@ import '../../domain/repositories/currency_repository.dart';
 class CurrencyRepositoryImpl implements CurrencyRepository {
   final CurrencyDataSource dataSource;
 
-  CurrencyRepositoryImpl(this.dataSource);
+  CurrencyRepositoryImpl({required this.dataSource});
 
   @override
   Future<Either<Failure, CurrencyEntity>> getCurrencyFromTHBToUSD(

@@ -19,7 +19,7 @@ class CurrencyUsecase implements UseCase<CurrencyEntity, Params> {
 class Params extends Equatable {
   final double amountTHB;
 
-  Params(this.amountTHB);
+  Params({required this.amountTHB});
 
   @override
   List<Object> get props => [amountTHB];

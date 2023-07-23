@@ -7,10 +7,10 @@ abstract class CurrencyDataSource {
   Future<CurrencyModel> getCurrencyFromTHBToUSD(double amountTHB);
 }
 
-class RevenueAccountDataSourceImpl implements CurrencyDataSource {
+class CurrencyDataSourceImpl implements CurrencyDataSource {
   final http.Client client;
 
-  RevenueAccountDataSourceImpl(this.client);
+  CurrencyDataSourceImpl({required this.client});
 
   @override
   Future<CurrencyModel> getCurrencyFromTHBToUSD(double amountTHB) async {

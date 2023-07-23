@@ -14,5 +14,5 @@ class CurrencyEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [newAmount, newCurrency, oldCurrency, oldAmount];
 }
