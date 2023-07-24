@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_flutter_with_bloc/features/revenue_account/data/models/revenue_account_model.dart';
-import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/bloc/todo_bloc.dart';
+import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/bloc/revenue_bloc.dart';
 
 class AddTodoScreen extends StatefulWidget {
   final int? index;
@@ -18,17 +18,17 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final todoBloc = BlocProvider.of<TodoBloc>(context);
+    final todoBloc = BlocProvider.of<RevenueBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.index == null ? 'ADD TODO' : 'EDIT TODO'),
+        title: Text(widget.index == null ? 'ADD REVENUE' : 'EDIT REVENUE'),
       ),
-      body: BlocBuilder<TodoBloc, TodoState>(
+      body: BlocBuilder<RevenueBloc, RevenueState>(
         builder: (context, state) {
           if (widget.index != null) {
-            final todo = (state as TodoLoaded).todoList[widget.index!];
+            final todo = (state as RevenueLoaded).revenueList[widget.index!];
 
             titleCtrl.text = todo.title;
             amountCtrl.text = todo.amountTHB.toString();
@@ -53,27 +53,36 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Sub title',
+                    labelText: 'Amount',
                   ),
                 ),
                 const SizedBox(
                   height: 10.0,
                 ),
                 ElevatedButton(
-                  child: Text(widget.index == null ? 'ADD TODO' : 'EDIT TODO'),
+                  child: Text(
+                      widget.index == null ? 'ADD REVENUE' : 'EDIT REVENUE'),
                   onPressed: () {
                     if (widget.index == null) {
-                      todoBloc.add(TodoEventAddTodo(
-                        todo: RevenueAccountModel(
+                      if (amountCtrl.text == '') {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text('Invalid amount!'),
+                        ));
+                        return;
+                      }
+
+                      todoBloc.add(RevenueEventAddRevenue(
+                        revenue: RevenueAccountModel(
                           title: titleCtrl.text,
                           amountTHB: double.parse(amountCtrl.text),
                           amountUSD: 0,
                         ),
                       ));
                     } else {
-                      todoBloc.add(TodoEventUpdateTodo(
+                      todoBloc.add(RevenueEventUpdateRevenue(
                         index: widget.index!,
-                        todo: RevenueAccountModel(
+                        revenue: RevenueAccountModel(
                           title: titleCtrl.text,
                           amountTHB: double.parse(amountCtrl.text),
                           amountUSD: 0,

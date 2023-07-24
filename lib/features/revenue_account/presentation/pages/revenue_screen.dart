@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/bloc/todo_bloc.dart';
-import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/pages/add_todo_screen.dart';
+import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/bloc/revenue_bloc.dart';
+import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/pages/add_revenue_screen.dart';
 
 class TodosScreen extends StatefulWidget {
   const TodosScreen({super.key});
@@ -13,20 +13,20 @@ class TodosScreen extends StatefulWidget {
 class _TodosScreenState extends State<TodosScreen> {
   @override
   Widget build(BuildContext context) {
-    final todoBloc = BlocProvider.of<TodoBloc>(context);
+    final todoBloc = BlocProvider.of<RevenueBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('TODO LIST'),
+        title: const Text('REVENUE LIST'),
       ),
-      body: BlocBuilder<TodoBloc, TodoState>(
+      body: BlocBuilder<RevenueBloc, RevenueState>(
         builder: (context, state) {
-          if (state is TodoLoaded) {
+          if (state is RevenueLoaded) {
             return ListView.builder(
-                itemCount: state.todoList.length,
+                itemCount: state.revenueList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var item = state.todoList[index];
+                  var item = state.revenueList[index];
 
                   return GestureDetector(
                     child: Card(
@@ -45,7 +45,7 @@ class _TodosScreenState extends State<TodosScreen> {
                                   )));
                     },
                     onDoubleTap: () {
-                      todoBloc.add(TodoEventRemoveTodo(index: index));
+                      todoBloc.add(RevenueEventRemoveRevenue(index: index));
                     },
                   );
                 });

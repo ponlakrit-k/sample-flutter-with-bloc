@@ -4,14 +4,14 @@ import 'package:sample_flutter_with_bloc/features/revenue_account/data/datasourc
 import 'package:sample_flutter_with_bloc/features/revenue_account/data/repositories/currency_repository_impl.dart';
 import 'package:sample_flutter_with_bloc/features/revenue_account/domain/repositories/currency_repository.dart';
 import 'package:sample_flutter_with_bloc/features/revenue_account/domain/usecases/currency_usecase.dart';
-import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/bloc/todo_bloc.dart';
+import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/bloc/revenue_bloc.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
   // Bloc
   sl.registerFactory(
-    () => TodoBloc(currencyUsecase: sl()),
+    () => RevenueBloc(currencyUsecase: sl()),
   );
 
   // Use cases
