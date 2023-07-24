@@ -53,7 +53,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Amount',
+                    labelText: 'Amount THB',
                   ),
                 ),
                 const SizedBox(

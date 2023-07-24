@@ -33,7 +33,7 @@ class _TodosScreenState extends State<TodosScreen> {
                       child: ListTile(
                         leading: const Icon(Icons.list),
                         title: Text(item.title),
-                        subtitle: Text(item.amountUSD.toString()),
+                        subtitle: Text("${item.amountUSD} USD"),
                       ),
                     ),
                     onTap: () {
