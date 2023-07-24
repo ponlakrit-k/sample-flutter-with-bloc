@@ -28,7 +28,7 @@ class CurrencyModel extends CurrencyEntity {
         newAmount: json["new_amount"]?.toDouble(),
         newCurrency: json["new_currency"],
         oldCurrency: json["old_currency"],
-        oldAmount: json["old_amount"],
+        oldAmount: json["old_amount"]?.toDouble(),
       );
 
   Map<String, dynamic> toJson() => {
