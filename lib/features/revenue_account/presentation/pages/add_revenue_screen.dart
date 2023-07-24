@@ -3,16 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_flutter_with_bloc/features/revenue_account/data/models/revenue_account_model.dart';
 import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/bloc/revenue_bloc.dart';
 
-class AddTodoScreen extends StatefulWidget {
+class AddRevenueScreen extends StatefulWidget {
   final int? index;
 
-  const AddTodoScreen({super.key, this.index});
+  const AddRevenueScreen({super.key, this.index});
 
   @override
-  State<AddTodoScreen> createState() => _AddTodoScreenState();
+  State<AddRevenueScreen> createState() => _AddRevenueScreenState();
 }
 
-class _AddTodoScreenState extends State<AddTodoScreen> {
+class _AddRevenueScreenState extends State<AddRevenueScreen> {
   final titleCtrl = TextEditingController();
   final amountCtrl = TextEditingController();
 

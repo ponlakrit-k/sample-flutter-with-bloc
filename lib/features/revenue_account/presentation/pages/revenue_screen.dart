@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/bloc/revenue_bloc.dart';
 import 'package:sample_flutter_with_bloc/features/revenue_account/presentation/pages/add_revenue_screen.dart';
 
-class TodosScreen extends StatefulWidget {
-  const TodosScreen({super.key});
+class RevenueScreen extends StatefulWidget {
+  const RevenueScreen({super.key});
 
   @override
-  State<TodosScreen> createState() => _TodosScreenState();
+  State<RevenueScreen> createState() => _RevenueScreenState();
 }
 
-class _TodosScreenState extends State<TodosScreen> {
+class _RevenueScreenState extends State<RevenueScreen> {
   @override
   Widget build(BuildContext context) {
     final todoBloc = BlocProvider.of<RevenueBloc>(context);
@@ -40,9 +40,10 @@ class _TodosScreenState extends State<TodosScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => AddTodoScreen(
-                                    index: index,
-                                  )));
+                            builder: (context) => AddRevenueScreen(
+                              index: index,
+                            ),
+                          ));
                     },
                     onDoubleTap: () {
                       todoBloc.add(RevenueEventRemoveRevenue(index: index));
@@ -57,8 +58,11 @@ class _TodosScreenState extends State<TodosScreen> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AddTodoScreen()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AddRevenueScreen(),
+              ));
         },
       ),
     );
